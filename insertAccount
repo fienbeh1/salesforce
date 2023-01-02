@@ -1,0 +1,50 @@
+// Manipulate Records with DML
+
+//URL {https://developer.salesforce.com/forums/?id=9060G000000XdsIQAS}
+//To pass this challenge, create an Apex class that inserts a new account named after an incoming parameter. If the account is successfully inserted, the method should return the account record. If a DML exception occurs, the method should return null.
+//The Apex class must be called AccountHandler and be in the public scope
+//The Apex class must have a public static method called insertNewAccount
+//The method must accept an incoming string as a parameter, which will be used to create the Account name
+//The method must insert the account into the system and then return the record
+//The method must also accept an empty string, catch the failed DML and then return null
+
+
+
+public class AccountHandler 
+{
+    public static Account insertNewAccount(String name)
+    {
+        Account newAccount = new Account(Name=name);
+        try{
+        insert newAccount;
+       
+        }catch(Exception e)
+        {
+            return null;
+        }
+         return newAccount;
+    }
+}
+
+/*Pass below to test the class in dubug window : 
+
+Account showAccount = new Account();
+showAccount = AccountHandler.insertNewAccount('SFDC New Account');
+System.debug('New Account Name: '+showAccount);*/
+
+We can also solve this challenge without using the try cath exceptions as,
+public class AccountHandler {
+    public static Account insertNewAccount(String AccountName) {
+        if(AccountName.length()>=1){
+            Account acc = new Account(Name=AccountName);
+            insert acc;
+            return acc;
+        }
+        else {
+                return null;      
+               }
+        }
+}
+//To verify enter this line of code in Execute Anonymous window:
+AccountHandler.insertNewAccount('trailhead');
+
