@@ -1,0 +1,14 @@
+//Create an Apex class that returns both contacts and leads based on a parameter | Salesforce
+public class ContactSearch {
+    public static List<contact> searchForContacts (String firstName, String zipCode) {        
+        List<Contact> contacts = [select ID, name from Contact where firstname =:firstName and MailingPostalCode =:zipCode];
+        return contacts;
+    }
+}
+
+//anonyumous window
+Contact[] conts = ContactSearch.searchForContacts('Jack', '27215');
+System.debug(conts.size());
+for(Contact cont : conts){
+	system.debug('cont ' + cont.name);    
+}
